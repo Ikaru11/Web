@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Login Page</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap');
+  *{box-sizing:border-box;font-family:'Poppins',sans-serif}
+  body{
+    margin:0;height:100vh;display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(135deg,#0f1724,#1f2b44);color:#fff;
+  }
+  .login-card{
+    width:360px;padding:36px;border-radius:12px;
+    background:rgba(255,255,255,0.06);
+    backdrop-filter:blur(8px);
+    text-align:center;
+    box-shadow:0 8px 30px rgba(2,6,23,0.6);
+  }
+  input{
+    width:100%;margin-bottom:14px;padding:11px 12px;
+    border-radius:8px;border:1px solid rgba(255,255,255,0.12);
+    background:transparent;color:#fff;outline:none;
+  }
+  button{
+    width:100%;padding:12px;border-radius:8px;border:none;
+    background:linear-gradient(90deg,#00f2fe,#4facfe);
+    color:#022;cursor:pointer;font-weight:600;
+  }
+  .alert{margin-top:10px;color:#ff9b9b;display:none}
+</style>
+</head>
+<body>
+  <div class="login-card">
+    <h2>Sign In</h2>
+    <input id="u" placeholder="Username" autocomplete="off">
+    <input id="p" type="password" placeholder="Password" autocomplete="off">
+    <button id="loginBtn">Login</button>
+    <div class="alert" id="alert"></div>
+  </div>
+
+<script>
+const users = {
+  admin1:{pass:"1234a", anim:"1val.mp4"},
+  admin2:{pass:"1234b", anim:"2SRT.mp4"},
+  admin3:{pass:"1234c", anim:"3RW.mp4"},
+  admin4:{pass:"1234d", anim:"4MIL.mp4"},
+  admin5:{pass:"1234e", anim:"5HAK.mp4"},
+  admin6:{pass:"1234f", anim:"6GEH.mp4"},
+  admin7:{pass:"1234g", anim:"7TRI.mp4"},
+  admin8:{pass:"1234h", anim:"8ARI.mp4"},
+  admin9:{pass:"1234i", anim:"9SHA.mp4"},
+  admin10:{pass:"1234j", anim:"10ABT.mp4"},
+  admin11:{pass:"1234k", anim:"11SCHALE.mp4"},
+  admin12:{pass:"1234l", anim:"anim12.mp4"}
+};
+
+document.getElementById("loginBtn").onclick = attemptLogin;
+document.getElementById("p").addEventListener("keypress", e => {if(e.key==="Enter") attemptLogin();});
+
+function attemptLogin(){
+  const u = document.getElementById("u").value.trim();
+  const p = document.getElementById("p").value.trim();
+  const alertEl = document.getElementById("alert");
+  alertEl.style.display="none";
+
+  if(!u || !p){ showAlert("Please fill all fields"); return; }
+  if(!users[u] || users[u].pass !== p){ showAlert("Invalid username or password"); return; }
+
+  // Redirect ke halaman animasi
+  window.location.href = `a.html?video=${encodeURIComponent(users[u].anim)}`;
+}
+
+function showAlert(msg){
+  const alertEl = document.getElementById("alert");
+  alertEl.innerText = msg;
+  alertEl.style.display = "block";
+}
+</script>
+</body>
+</html>
